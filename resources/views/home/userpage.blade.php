@@ -49,7 +49,7 @@
       @include('home.client');
       <!-- end client section -->
       <!-- footer start -->
-@include('home.footer');
+      @include('home.footer');
       <!-- footer end -->
       <div class="cpy_">
          <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
