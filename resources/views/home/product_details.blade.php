@@ -2,6 +2,7 @@
 <html>
    <head>
       <!-- Basic -->
+      <base href="/public">
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <!-- Mobile Metas -->
@@ -23,32 +24,60 @@
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;800&display=swap" rel="stylesheet">
    </head>
    <body>
-      <div class="hero_area">
          <!-- header section strats -->
          @include('home.header');
          <!-- end header section -->
-         <!-- slider section -->
-        @include('home.slider');
-         <!-- end slider section -->
-      </div>
-      <!-- why section -->
-      @include('home.why');
-      <!-- end why section -->
+       <!-- product details section -->
+       <div class="col-sm-6 col-md-4 col-lg-4" style="margin: auto;padding:30px">
+           <div class="img-box" >
+              <img style="width:50%" src="product/{{$product->image}}" alt="">
+           </div>
+           <div class="detail-box">
+              <h5>
+               {{$product->title}}
+           </h5>
 
-      <!-- arrival section -->
-      @include('home.new_arrival');
-      <!-- end arrival section -->
+           @if($product->discount_price != null)
 
-      <!-- product section -->
-      @include('home.product');
-      <!-- end product section -->
+            <h6 style="color: red">
+                   Discount price
+                   <br>
+               L.E {{$product->discount_price}}
+            </h6>
 
-      <!-- subscribe section -->
-        @include('home.subscribe');
-      <!-- end subscribe section -->
-      <!-- client section -->
-      @include('home.client');
-      <!-- end client section -->
+              <h6 style="text-decoration: line-through;color:blue">
+               Price
+               <br>
+               L.E {{$product->price}}
+              </h6>
+           @else
+              <h6 style="color: blue">
+               Price
+               <br>
+              L.E {{$product->price}}
+             </h6>
+             @endif
+             <h5>Product Description: {{$product->description}}</h5>
+             <h5>Product category: {{$product->category}}</h5>
+             <h5>available quantity: {{$product->quantity}}</h5>
+             <form action="{{url('add_cart',$product->id)}}" method="post">
+                @csrf
+                <div >
+                    <div class="col-md-4">
+                     <input type="submit" value="Add to cart" class="option">
+                </div>
+                    <div class="col-md-4">
+                    <input type="number" name="quantity" value="1" min="1" style="width:60px;">
+                </div>
+                </div>
+              </form>           </div>
+        </div>
+     </div>
+
+
+
+
+
       <!-- footer start -->
       @include('home.footer');
       <!-- footer end -->

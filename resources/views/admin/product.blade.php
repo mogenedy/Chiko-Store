@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,104 +9,116 @@
     <!-- plugins:css -->
     @include('admin.css');
     <style>
-        .div_center{
+        .div_center {
             text-align: center;
             padding-top: 20px;
         }
-        .div_font{
+
+        .div_font {
             font-size: 40px;
             padding-bottom: 40px;
         }
-          .input_color{
-            color: black;
-          }
 
-          .table-center{
+        .input_color {
+            color: black;
+        }
+
+        .table-center {
             margin: auto;
             border: 2px solid white;
             width: 50%;
             text-align: center;
-          }
-          label{
+        }
+
+        label {
             display: inline-block;
             width: 200px
-
-          }
+        }
     </style>
     <!-- End layout styles -->
     <link rel="shortcut icon" href="admin/assets/images/favicon.png" />
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="container-scroller">
-      <!-- partial:partials/_sidebar.html -->
-      @include('admin.sidebar');
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_navbar.html -->
-        @include('admin.navbar');
+        <!-- partial:partials/_sidebar.html -->
+        @include('admin.sidebar');
         <!-- partial -->
-        <div class="main-panel">
-            <div class="content-wrapper">
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_navbar.html -->
+            @include('admin.navbar');
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
 
 
                     <div class="div_center">
+                        {{-- show message after add category --}}
+                        @if (Session()->has('message'))
+                            <div class="alert alert-success">
+                                <button class="close" type="button" data-dismiss="alert" aria-hidden="true">X</button>
+                                {{ Session()->get('message') }}
+                            </div>
+                        @endif
                         <h1 class="div_font">Add product</h1>
-
-                        <form action="{{url('add_product')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('add_product') }}" method="POST" enctype="multipart/form-data">
                             @csrf <!-- Add this line to include the CSRF token -->
 
 
-                        <label >product title: </label>
-                        <input type="text" name="title" placeholder="write a title" class="input_color">
+                            <label>product title: </label>
+                            <input type="text" name="title" placeholder="write a title" class="input_color">
                     </div>
 
                     <div class="div_center">
-                        <label >product Description :</label>
+                        <label>product Description :</label>
                         <input type="text" name="description" placeholder="write a title" class="input_color">
                     </div>
 
                     <div class="div_center">
-                        <label >product Price :</label>
+                        <label>product Price :</label>
                         <input type="number" name="price" placeholder="write a title" class="input_color">
                     </div>
 
                     <div class="div_center">
-                        <label >Discount price :</label>
-                        <input type="number" name="discount_price" placeholder="write discount price" class="input_color">
+                        <label>Discount price :</label>
+                        <input type="number" name="discount_price" placeholder="write discount price"
+                            class="input_color">
                     </div>
 
                     <div class="div_center">
-                        <label >product Quantity :</label>
-                        <input type="number" name="quantity" min="0" placeholder="write product quantity" class="input_color">
+                        <label>product Quantity :</label>
+                        <input type="number" name="quantity" min="0" placeholder="write product quantity"
+                            class="input_color">
                     </div>
 
 
                     <div class="div_center">
-                        <label >product category :</label>
-                            <select class="input_color" name="category" >
-                                <option value="" selected="">add category here</option>
-                                @foreach($category as $category)
-                                <option value="{{$category->category_name}}">{{$category->category_name}}</option>
-                                @endforeach
-                            </select>
-                     </div>
+                        <label>product category :</label>
+                        <select class="input_color" name="category">
+                            <option value="" selected="">add category here</option>
+                            @foreach ($category as $category)
+                                <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="div_center">
-                        <label >product image "</label>
-                        <input type="file" name="image"   required="">
+                        <label>product image "</label>
+                        <input type="file" name="image" required="">
                     </div>
 
 
                     <div class="div_center">
                         <input type="submit" class="btn btn-success" value="Add product">
                     </div>
-                </form>
+                    </form>
 
                 </div>
             </div>
-        <!-- plugins:js -->
-    @include('admin.script');
+            <!-- plugins:js -->
+            @include('admin.script');
 
-    <!-- End custom js for this page -->
-  </body>
+            <!-- End custom js for this page -->
+</body>
+
 </html>
