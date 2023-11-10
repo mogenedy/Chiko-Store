@@ -41,6 +41,14 @@
         height: 200px;
     width: 200px    }
 
+    .total_deg{
+        font-size: 25px;
+        width: 70;
+        margin: auto;
+        text-align: center;
+        font-family:'Tajawal', sans-serif;
+    }
+
 
     </style>
 </head>
@@ -50,6 +58,13 @@
         <!-- header section strats -->
         @include('home.header');
         <!-- end header section -->
+        {{-- show message after add category --}}
+        @if (Session()->has('message'))
+        <div class="alert alert-success">
+            <button class="close" type="button" data-dismiss="alert" aria-hidden="true">X</button>
+            {{ Session()->get('message') }}
+        </div>
+       @endif
     <div class="cart_center">
         <table>
             <tr>
@@ -80,12 +95,12 @@
         <h1 class="btn btn-success">Total price : L.E{{$totaPrice}}</h1>
 
     </div>
-    <div>
-        <h1>Proceed to Order</h1>
+    <div class="total_deg">
+        <h1 >Proceed to Order</h1>
 
 
-        <a href="">Cash On Delivery</a>
-        <a href="">Pay Using Card</a>
+        <a href="{{url('cash_order')}}" class="btn btn-danger">Cash on delivery</a>
+        <a href="" class="btn btn-danger">Pay using visa</a>
     </div>
 
 

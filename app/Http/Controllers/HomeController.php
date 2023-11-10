@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -83,6 +84,39 @@ class HomeController extends Controller
             $cart=Cart::find($id);
             $cart->delete();
             return redirect()->back();
+        }else{
+            return redirect('login');
+        }
+    }
+
+    public function cash_order(){
+        if(Auth::id()){
+            $userid = Auth::user()->id;
+            $data = Cart::where('user_id','=',$userid)->get();
+
+            foreach($data as $cartItem){
+                $order = new Order;
+                $order->name = $cartItem->name;
+                $order->email = $cartItem->email;
+                $order->phone = $cartItem->phone;
+                $order->address = $cartItem->address;
+                $order->user_id = $cartItem->user_id;
+                $order->product_title = $cartItem->product_title;
+                $order->quantity = $cartItem->quantity;
+                $order->price = $cartItem->price;
+                $order->image = $cartItem->image;
+                $order->product_id = $cartItem->product_id;
+                $order->payment_status = 'paid';
+                $order->delivery_status = 'pending';
+                $order->save();
+                //
+                $cart_id=$cartItem->id;
+                $cart=Cart::find($cart_id);
+                $cart->delete();
+            }
+
+            return redirect()->back()->with('message','we have recieved your order .We will connect you soon...');
+
         }else{
             return redirect('login');
         }
