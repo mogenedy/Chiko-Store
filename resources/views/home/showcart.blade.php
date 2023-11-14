@@ -100,7 +100,7 @@
 
 
         <a href="{{url('cash_order')}}" class="btn btn-danger">Cash on delivery</a>
-        <a href="" class="btn btn-danger">Pay using visa</a>
+        <a href="{{url('stripe',$totaPrice)}}" class="btn btn-danger">Pay using visa</a>
     </div>
 
 
