@@ -1,48 +1,78 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Bootstrap4 Dashboard Template">
+    <meta name="author" content="ParkerThemes">
+    <link rel="shortcut icon" href="img/fav.png" />
 
-        <x-validation-errors class="mb-4" />
+    <!-- Title -->
+    <title>Custom Admin Template - Login</title>
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
+    <!-- Common CSS Files -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+</head>
 
+<body class="authentication">
+    <!-- Container start -->
+    <div class="container">
         <form method="POST" action="{{ route('login') }}">
             @csrf
+            <div class="row justify-content-md-center">
+                <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
+                    <div class="login-screen">
+                        <div class="login-box">
+                            <a href="#" class="login-logo">
+                                <img src="{{ asset('img/logo-dark.png') }}" alt="Custom Admin Dashboard" />
+                            </a>
+                            <h5>Welcome back,<br />Please Login to your Account.</h5>
 
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            </div>
+                            <!-- Validation Errors -->
+                            <x-validation-errors class="mb-4" />
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
+                            @if (session('status'))
+                                <div class="mb-4 font-medium text-sm text-green-600">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
 
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
+                            <div class="form-group">
+                                <input id="email" type="email" class="form-control" name="email" placeholder="Email Address" value="{{ old('email') }}" required autofocus />
+                            </div>
 
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
+                            <div class="form-group">
+                                <input id="password" type="password" class="form-control" name="password" placeholder="Password" required />
+                            </div>
 
-                <x-button class="ml-4">
-                    {{ __('Log in') }}
-                </x-button>
+                            <div class="actions mb-4">
+                                <div class="custom-control custom-checkbox">
+                                    <input id="remember_me" type="checkbox" class="custom-control-input" name="remember">
+                                    <label class="custom-control-label" for="remember_me">Remember me</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
+
+                            <div class="forgot-pwd">
+                                @if (Route::has('password.request'))
+                                    <a class="link" href="{{ route('password.request') }}">Forgot password?</a>
+                                @endif
+                            </div>
+
+                            <hr>
+
+                            <div class="actions align-left">
+                                <span class="additional-link">New here?</span>
+                                <a href="{{ route('register') }}" class="btn btn-dark">Create an Account</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
-    </x-authentication-card>
-</x-guest-layout>
+    </div>
+    <!-- Container end -->
+</body>
+</html>
